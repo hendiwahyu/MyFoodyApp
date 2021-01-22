@@ -1,6 +1,7 @@
-package com.pinteraktif.myfoody.ui.fragments.recipes
+ package com.pinteraktif.myfoody.ui.fragments.recipes
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,14 +40,33 @@ class RecipesFragment : Fragment() {
         mView = inflater.inflate(R.layout.fragment_recipes, container, false)
 
         setupRecycleView()
-        requestApiData()
+        readDatabase()
 
         return mView
     }
 
+    private fun setupRecycleView() {
+        mView.shimmer_recycler_view.adapter = mAdapter
+        mView.shimmer_recycler_view.layoutManager = LinearLayoutManager(requireContext())
+        showShimmerEffect()
+    }
+
+    private fun readDatabase() {
+        Log.d("Recipes Fragment", "readDatabase: Called")
+        mainViewModel.readRecipes.observe(viewLifecycleOwner, { database ->
+            if (database.isNotEmpty()){
+                mAdapter.setData(database[0].foodRecipe)
+                hideShimmerEffect()
+            }else {
+                requestApiData()
+            }
+        })
+    }
+
     private fun requestApiData() {
+        Log.d("Recipes Fragment", "requestApiData: Called")
         mainViewModel.getRecipes(recipesViewModel.applyQueries())
-        mainViewModel.recipesResponse.observe(viewLifecycleOwner) { responseNetworkFoodRecipe ->
+        mainViewModel.recipesResponse.observe(viewLifecycleOwner, { responseNetworkFoodRecipe ->
             when (responseNetworkFoodRecipe) {
                 is NetworkResult.Success -> {
                     hideShimmerEffect()
@@ -64,13 +84,7 @@ class RecipesFragment : Fragment() {
                 }
                 is NetworkResult.Loading -> showShimmerEffect()
             }
-        }
-    }
-
-    private fun setupRecycleView() {
-        mView.shimmer_recycler_view.adapter = mAdapter
-        mView.shimmer_recycler_view.layoutManager = LinearLayoutManager(requireContext())
-        showShimmerEffect()
+        })
     }
 
 

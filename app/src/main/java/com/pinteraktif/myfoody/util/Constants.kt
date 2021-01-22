@@ -2,7 +2,7 @@ package com.pinteraktif.myfoody.util
 
 class Constants {
 
-    companion object{
+    companion object {
         const val BASE_URL = "https://api.spoonacular.com"
         const val API_KEY = "df33e073e9e7426fbdb8337b2881f0c5"
 
@@ -14,5 +14,8 @@ class Constants {
         const val QUERY_ADD_RECIPE_INFORMATION = "addRecipeInformation"
         const val QUERY_FILL_INGREDIENTS = "fillIngredients"
 
+        //ROOM DATABASE
+        const val DATABASE_NAME = "recipes_database"
+        const val RECIPES_TABLE = "recipes_table"
     }
 }

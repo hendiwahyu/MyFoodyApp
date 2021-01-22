@@ -13,7 +13,8 @@ class RecipesAdapter : RecyclerView.Adapter<RecipesAdapter.MyViewHolder>() {
 
     private var recipes = emptyList<Result>()
 
-    class MyViewHolder(private val binding: ItemRecipesRowLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+    class MyViewHolder(private val binding: ItemRecipesRowLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(result: Result) {
             binding.result = result
             binding.executePendingBindings()
