@@ -52,8 +52,6 @@ class MainViewModel @ViewModelInject constructor(
             } catch (e: Exception) {
                 _recipesResponse.value = NetworkResult.Error("Recipes not found.")
             }
-
-
         } else
             _recipesResponse.value = NetworkResult.Error("No Internet Connection")
 
