@@ -16,8 +16,10 @@ class RecipesBinding {
         @JvmStatic
         fun errorImageVisibility(
             imageView: ImageView,
-            apiResponse: NetworkResult<FoodRecipe>?, /** Penting untuk menambahakan non null !*/
-            database: List<RecipesEntity>? /** Penting untuk menambahakan non null !*/
+            /** Penting untuk menambahakan non null !*/
+            apiResponse: NetworkResult<FoodRecipe>?,
+            /** Penting untuk menambahakan non null !*/
+            database: List<RecipesEntity>?
         ) {
             if (apiResponse is NetworkResult.Error && database.isNullOrEmpty()) {
                 imageView.visibility = View.VISIBLE
@@ -32,15 +34,17 @@ class RecipesBinding {
         @JvmStatic
         fun errorTextViewVisibility(
             textView: TextView,
-            apiResponse: NetworkResult<FoodRecipe>?, /** Penting untuk menambahakan non null !*/
-            database: List<RecipesEntity>? /** Penting untuk menambahakan non null !*/
-        ){
-            if (apiResponse is NetworkResult.Error && database.isNullOrEmpty()){
+            /** Penting untuk menambahakan non null !*/
+            apiResponse: NetworkResult<FoodRecipe>?,
+            /** Penting untuk menambahakan non null !*/
+            database: List<RecipesEntity>?
+        ) {
+            if (apiResponse is NetworkResult.Error && database.isNullOrEmpty()) {
                 textView.visibility = View.VISIBLE
                 textView.text = apiResponse.message.toString()
-            } else if (apiResponse is NetworkResult.Loading){
+            } else if (apiResponse is NetworkResult.Loading) {
                 textView.visibility = View.INVISIBLE
-            } else if (apiResponse is NetworkResult.Success){
+            } else if (apiResponse is NetworkResult.Success) {
                 textView.visibility = View.INVISIBLE
             }
         }
