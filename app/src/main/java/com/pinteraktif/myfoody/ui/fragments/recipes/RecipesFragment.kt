@@ -7,25 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.observe
-import androidx.navigation.NavArgs
+import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pinteraktif.myfoody.R
 import com.pinteraktif.myfoody.adapters.RecipesAdapter
 import com.pinteraktif.myfoody.databinding.FragmentRecipesBinding
+import com.pinteraktif.myfoody.util.NetworkListener
 import com.pinteraktif.myfoody.util.NetworkResult
 import com.pinteraktif.myfoody.util.observeOnce
 import com.pinteraktif.myfoody.viewmodels.MainViewModel
 import com.pinteraktif.myfoody.viewmodels.RecipesViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_recipes.*
-import kotlinx.android.synthetic.main.fragment_recipes.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.util.zip.Inflater
 
 @AndroidEntryPoint
 class RecipesFragment : Fragment() {
@@ -38,6 +35,8 @@ class RecipesFragment : Fragment() {
 
     private var _binding: FragmentRecipesBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var networkListener: NetworkListener
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,17 +55,39 @@ class RecipesFragment : Fragment() {
         binding.mainViewModel = mainViewModel
 
         setupRecycleView()
-        readDatabase()
+
+        //Store data back online
+        recipesViewModel.readBackOnline.observe(viewLifecycleOwner, Observer {
+            recipesViewModel.backOnline = it
+        })
+
+
+        /** Check connection internet */
+        lifecycleScope.launch {
+            networkListener = NetworkListener()
+            networkListener.checkNetworkAvailability(requireContext())
+                .collect { status ->
+                    Log.d("NetworkListener", status.toString())
+                    recipesViewModel.networkStatus = status
+                    recipesViewModel.showNetworkStatus()
+                    readDatabase()
+                }
+        }
 
         binding.recipesFab.setOnClickListener {
-           findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
+            if (recipesViewModel.networkStatus) {
+                findNavController().navigate(R.id.action_recipesFragment_to_recipesBottomSheet)
+            } else {
+                recipesViewModel.showNetworkStatus()
+            }
+
         }
 
         return binding.root
     }
 
     private fun setupRecycleView() {
-       binding.shimmerRecyclerView.adapter = mAdapter
+        binding.shimmerRecyclerView.adapter = mAdapter
         binding.shimmerRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         showShimmerEffect()
     }
@@ -74,7 +95,7 @@ class RecipesFragment : Fragment() {
     private fun readDatabase() {
         lifecycleScope.launch {
             mainViewModel.readRecipes.observeOnce(viewLifecycleOwner, { database ->
-                if (database.isNotEmpty() &&  !args.backFromBottomSheet) {
+                if (database.isNotEmpty() && !args.backFromBottomSheet) {
                     Log.d("Recipes Fragment", "readDatabase: Called")
                     mAdapter.setData(database[0].foodRecipe)
                     hideShimmerEffect()
@@ -114,10 +135,10 @@ class RecipesFragment : Fragment() {
         })
     }
 
-    private fun loadDataFromCache(){
+    private fun loadDataFromCache() {
         lifecycleScope.launch {
-            mainViewModel.readRecipes.observe(viewLifecycleOwner, {database ->
-                if (database.isNotEmpty()){
+            mainViewModel.readRecipes.observe(viewLifecycleOwner, { database ->
+                if (database.isNotEmpty()) {
                     mAdapter.setData(database[0].foodRecipe)
                 }
             })
