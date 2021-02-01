@@ -16,6 +16,9 @@
             android:name="backFromBottomSheet"
             app:argType="boolean"
             android:defaultValue="false" />
+        <action
+            android:id="@+id/action_recipesFragment_to_detailsActivity"
+            app:destination="@id/detailsActivity" />
     </fragment>
     <fragment
         android:id="@+id/favoriteRecipesFragment"
@@ -37,4 +40,12 @@
             app:destination="@id/recipesFragment"
             app:launchSingleTop="false" />
     </dialog>
+    <activity
+        android:id="@+id/detailsActivity"
+        android:name="com.pinteraktif.myfoody.ui.DetailsActivity"
+        android:label="Details" >
+        <argument
+            android:name="result"
+            app:argType="com.pinteraktif.myfoody.models.Result" />
+    </activity>
 </navigation>

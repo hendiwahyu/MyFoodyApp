@@ -15,6 +15,7 @@
         android:id="@+id/recipes_row_card_view"
         android:layout_width="match_parent"
         android:layout_height="180dp"
+        onRecipesClickListener="@{result}"
         android:layout_margin="8dp"
         app:cardCornerRadius="10dp">
 
@@ -62,7 +63,7 @@
                 android:ellipsize="end"
                 android:hint="@string/description"
                 android:maxLines="3"
-                android:text="@{result.summary}"
+                parseHtml="@{result.summary}"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="@+id/tittle_text_view"
                 app:layout_constraintStart_toStartOf="@+id/tittle_text_view"
