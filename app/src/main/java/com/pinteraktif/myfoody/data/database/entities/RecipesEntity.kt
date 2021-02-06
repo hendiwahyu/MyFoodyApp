@@ -1,4 +1,4 @@
-package com.pinteraktif.myfoody.data.database
+package com.pinteraktif.myfoody.data.database.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
