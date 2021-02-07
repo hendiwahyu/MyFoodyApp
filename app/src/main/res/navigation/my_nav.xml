@@ -21,11 +21,6 @@
             app:destination="@id/detailsActivity" />
     </fragment>
     <fragment
-        android:id="@+id/favoriteRecipesFragment"
-        android:name="com.pinteraktif.myfoody.ui.fragments.favorites.FavoriteRecipesFragment"
-        android:label="favorite"
-        tools:layout="@layout/fragment_favorite_recipes" />
-    <fragment
         android:id="@+id/foodJokeFragment"
         android:name="com.pinteraktif.myfoody.ui.fragments.foodjoke.FoodJokeFragment"
         android:label="joke"
@@ -48,4 +43,10 @@
             android:name="result"
             app:argType="com.pinteraktif.myfoody.models.Result" />
     </activity>
+    <fragment
+        android:id="@+id/newFavoriteRecipesFragment"
+        android:name="com.pinteraktif.myfoody.ui.fragments.favorites.NewFavoriteRecipesFragment"
+        android:label="Favorite Recipes"
+        tools:layout="@layout/fragment_new_favorite_recipes" />
+
 </navigation>

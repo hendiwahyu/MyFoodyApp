@@ -13,24 +13,26 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/recipes_row_card_view"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
         onRecipesClickListener="@{result}"
-        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
         app:cardCornerRadius="10dp">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/recipe_image_view"
-                android:layout_width="180dp"
+                loadImageFromUrl="@{result.image}"
+                android:layout_width="200dp"
                 android:layout_height="0dp"
                 android:contentDescription="@string/recipe_image"
-                android:scaleType="fitXY"
-                loadImageFromUrl="@{result.image}"
+                android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -43,8 +45,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:hint="@string/tittle_recipe"
                 android:ellipsize="end"
+                android:hint="@string/tittle_recipe"
                 android:maxLines="2"
                 android:text="@{result.title}"
                 android:textAllCaps="false"
@@ -57,13 +59,13 @@
 
             <TextView
                 android:id="@+id/description_text_view"
+                parseHtml="@{result.summary}"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:hint="@string/description"
                 android:maxLines="3"
-                parseHtml="@{result.summary}"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="@+id/tittle_text_view"
                 app:layout_constraintStart_toStartOf="@+id/tittle_text_view"
@@ -73,7 +75,8 @@
                 android:id="@+id/heart_image_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="36dp"
                 android:contentDescription="@string/heart_image"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/description_text_view"

@@ -59,4 +59,6 @@
     <string name="healthy">Healthy</string>
     <string name="cheap">Cheap</string>
     <string name="summary_text_view">Summary text view</string>
+    <string name="no_favorite_recipes">No Favorite Recipes</string>
+    <string name="image_no_recipes">image no recipes</string>
 </resources>

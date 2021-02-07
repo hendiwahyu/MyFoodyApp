@@ -14,7 +14,10 @@ interface RecipesDao {
     @Query("SELECT * FROM recipes_table ORDER BY id ASC")
     fun readRecipes(): Flow<List<RecipesEntity>>
 
-    /** Create Insert, Read, Delete, and Delete all favorite recipes to Local Database  */
+    /**
+     * Favorite Entity access.
+     * Create Insert, Read, Delete, and Delete all favorite recipes to Local Database
+     */
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavoriteRecipe(favoritesEntity: FavoritesEntity)
