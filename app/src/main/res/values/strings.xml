@@ -61,4 +61,6 @@
     <string name="summary_text_view">Summary text view</string>
     <string name="no_favorite_recipes">No Favorite Recipes</string>
     <string name="image_no_recipes">image no recipes</string>
+    <string name="delete_favorite_recipe_menu">Delete Favorite Recipe Menu</string>
+    <string name="delete_all">Delete All</string>
 </resources>

@@ -1,11 +1,10 @@
 package com.pinteraktif.myfoody.di
 
-import com.pinteraktif.myfoody.util.Constants.Companion.BASE_URL
 import com.pinteraktif.myfoody.data.network.FoodRecipeApi
+import com.pinteraktif.myfoody.util.Constants.Companion.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -20,7 +19,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideHttpClient(): OkHttpClient{
+    fun provideHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .readTimeout(15, TimeUnit.SECONDS)
             .connectTimeout(15, TimeUnit.SECONDS)
@@ -29,7 +28,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideConverterFactory(): GsonConverterFactory{
+    fun provideConverterFactory(): GsonConverterFactory {
         return GsonConverterFactory.create()
     }
 

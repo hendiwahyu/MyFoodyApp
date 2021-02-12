@@ -57,14 +57,14 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
 
         setupRecycleView()
 
-        //Store data back online
+        /** Store data back online */
         recipesViewModel.readBackOnline.observe(viewLifecycleOwner, Observer {
             recipesViewModel.backOnline = it
         })
 
 
         /** Check connection internet */
-        lifecycleScope.launch {
+        lifecycleScope.launchWhenStarted {
             networkListener = NetworkListener()
             networkListener.checkNetworkAvailability(requireContext())
                 .collect { status ->
@@ -81,11 +81,8 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
             } else {
                 recipesViewModel.showNetworkStatus()
             }
-
         }
-
         setHasOptionsMenu(true)
-
         return binding.root
     }
 

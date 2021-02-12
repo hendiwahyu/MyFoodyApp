@@ -1,8 +1,8 @@
 package com.pinteraktif.myfoody.bindingadapters
 
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.pinteraktif.myfoody.adapters.FavoriteRecipesAdapter
@@ -12,30 +12,23 @@ class FavoriteRecipesBinding {
 
     companion object {
 
-        @BindingAdapter("viewVisibility", "setData", requireAll = false)
+        @BindingAdapter("setVisibility", "setData", requireAll = false)
         @JvmStatic
-        fun setDataAndViewVisibility(
+        fun setVisibility(
             view: View,
-            favoritesEntity: List<FavoritesEntity>?,
+            favoriteEntity: List<FavoritesEntity>?,
             mAdapter: FavoriteRecipesAdapter?
         ) {
-            if (favoritesEntity.isNullOrEmpty()) {
-                when (view) {
-                    is ImageView -> View.VISIBLE
-                    is TextView -> View.VISIBLE
-                    is RecyclerView -> View.INVISIBLE
-                }
-            } else {
-                when (view) {
-                    is ImageView -> View.INVISIBLE
-                    is TextView -> View.INVISIBLE
-                    is RecyclerView -> {
-                        View.VISIBLE
-                        mAdapter?.setData(favoritesEntity)
+            when (view) {
+                is RecyclerView -> {
+                    val dataCheck = favoriteEntity.isNullOrEmpty()
+                    view.isInvisible = dataCheck
+                    if (!dataCheck) {
+                        favoriteEntity?.let { mAdapter?.setData(it) }
                     }
                 }
+                else -> view.isVisible = favoriteEntity.isNullOrEmpty()
             }
         }
-
     }
 }

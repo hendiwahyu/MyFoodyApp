@@ -3,6 +3,7 @@ package com.pinteraktif.myfoody.bindingadapters
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.pinteraktif.myfoody.data.database.entities.RecipesEntity
 import com.pinteraktif.myfoody.models.FoodRecipe
@@ -12,13 +13,37 @@ class RecipesBinding {
 
     companion object {
 
+        @BindingAdapter("readApiResponse", "readDatabase", requireAll = false)
+        @JvmStatic
+        fun handleDataErrors(
+            view: View,
+            apiResponse: NetworkResult<FoodRecipe>?,
+            database: List<RecipesEntity>?
+        ) {
+            when (view) {
+                is ImageView -> {
+                    view.isVisible = apiResponse is NetworkResult.Error && database.isNullOrEmpty()
+                }
+                is TextView -> {
+                    view.isVisible = apiResponse is NetworkResult.Error && database.isNullOrEmpty()
+                    view.text = apiResponse?.message.toString()
+                }
+            }
+        }
+    }
+
+
+    /*companion object {
+
         @BindingAdapter("readApiResponse", "readDatabase", requireAll = true)
         @JvmStatic
         fun errorImageVisibility(
             imageView: ImageView,
-            /** Penting untuk menambahakan non null !*/
+            */
+    /** Penting untuk menambahakan non null !*//*
             apiResponse: NetworkResult<FoodRecipe>?,
-            /** Penting untuk menambahakan non null !*/
+            */
+    /** Penting untuk menambahakan non null !*//*
             database: List<RecipesEntity>?
         ) {
             if (apiResponse is NetworkResult.Error && database.isNullOrEmpty()) {
@@ -34,9 +59,11 @@ class RecipesBinding {
         @JvmStatic
         fun errorTextViewVisibility(
             textView: TextView,
-            /** Penting untuk menambahakan non null !*/
+            */
+    /** Penting untuk menambahakan non null !*//*
             apiResponse: NetworkResult<FoodRecipe>?,
-            /** Penting untuk menambahakan non null !*/
+            */
+    /** Penting untuk menambahakan non null !*//*
             database: List<RecipesEntity>?
         ) {
             if (apiResponse is NetworkResult.Error && database.isNullOrEmpty()) {
@@ -49,5 +76,5 @@ class RecipesBinding {
             }
         }
 
-    }
+    }*/
 }

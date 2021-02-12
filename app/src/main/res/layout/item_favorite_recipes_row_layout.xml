@@ -10,11 +10,10 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/recipesRowLayout"
+        android:id="@+id/favorite_recipes_row_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp">
+        android:layout_margin="4dp">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/favorite_row_cardView"
@@ -26,6 +25,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:cardBackgroundColor="@color/white"
             app:strokeColor="@color/lightMediumGray"
             app:strokeWidth="1dp">
 
