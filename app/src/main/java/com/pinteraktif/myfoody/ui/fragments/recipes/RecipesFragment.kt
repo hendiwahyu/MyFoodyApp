@@ -49,8 +49,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
         _binding = FragmentRecipesBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.mainViewModel = mainViewModel
@@ -202,8 +201,8 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
         binding.shimmerRecyclerView.hideShimmer()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 

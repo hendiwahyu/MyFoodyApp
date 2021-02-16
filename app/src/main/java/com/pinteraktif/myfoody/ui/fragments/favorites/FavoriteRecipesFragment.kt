@@ -25,26 +25,23 @@ class FavoriteRecipesFragment : Fragment() {
     }
 
     private var _binding: FragmentFavoriteRecipesBinding? = null
-    private val binding get() = _binding
+    private val binding get() = _binding!!
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-//        val view = inflater.inflate(R.layout.fragment_new_favorite_recipes, container, false)
-
+    ): View {
         _binding = FragmentFavoriteRecipesBinding.inflate(inflater, container, false)
-        binding?.lifecycleOwner = this
-        binding?.mAdapter = mAdapter
-        binding?.mainViewModel = mainViewModel
+        binding.lifecycleOwner = this
+        binding.mAdapter = mAdapter
+        binding.mainViewModel = mainViewModel
 
-        binding?.favoriteRecyclerView?.let { setupRecyclerView(it) }
+        setupRecyclerView(binding.favoriteRecyclerView)
 
         setHasOptionsMenu(true)
 
-        return binding?.root
+        return binding.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -65,10 +62,9 @@ class FavoriteRecipesFragment : Fragment() {
     }
 
     private fun showSnackBar() {
-        binding?.let {
-            Snackbar.make(it.root, "All recipes are removed", Snackbar.LENGTH_SHORT)
-                .setAction("Okay") {}.show()
-        }
+        Snackbar.make(binding.root, "All recipes are removed", Snackbar.LENGTH_SHORT)
+            .setAction("Okay") {}.show()
+
     }
 
     override fun onDestroyView() {

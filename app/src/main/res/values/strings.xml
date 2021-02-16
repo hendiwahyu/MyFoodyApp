@@ -63,4 +63,11 @@
     <string name="image_no_recipes">image no recipes</string>
     <string name="delete_favorite_recipe_menu">Delete Favorite Recipe Menu</string>
     <string name="delete_all">Delete All</string>
+    <string name="error">Error</string>
+
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </string>
+    <string name="image_error">Image Error</string>
 </resources>

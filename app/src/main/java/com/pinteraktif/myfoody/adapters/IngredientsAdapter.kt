@@ -1,41 +1,47 @@
 package com.pinteraktif.myfoody.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.pinteraktif.myfoody.R
+import com.pinteraktif.myfoody.databinding.ItemIngredientsRowLayoutBinding
 import com.pinteraktif.myfoody.models.ExtendedIngredient
 import com.pinteraktif.myfoody.util.Constants.Companion.BASE_IMAGE_URL
 import com.pinteraktif.myfoody.util.RecipesDiffUtil
-import kotlinx.android.synthetic.main.item_ingredients_row_layout.view.*
 import java.util.*
 
-class IngredientsAdapter : RecyclerView.Adapter<IngredientsAdapter.ViewHolder>() {
+class IngredientsAdapter : RecyclerView.Adapter<IngredientsAdapter.MyViewHolder>() {
 
     private var ingredientsList = emptyList<ExtendedIngredient>()
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_ingredients_row_layout, parent, false)
-        return ViewHolder(view)
+    class MyViewHolder(val binding: ItemIngredientsRowLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+//        companion object {
+//            fun from(parent: ViewGroup): MyViewHolder {
+//                val layoutInflater = LayoutInflater.from(parent.context)
+//                val binding = ItemIngredientsRowLayoutBinding.inflate(layoutInflater)
+//                return MyViewHolder(binding)
+//            }
+//        }
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        return MyViewHolder(ItemIngredientsRowLayoutBinding.inflate(LayoutInflater.from(parent.context), parent,false))
+    }
+
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentIngredient = ingredientsList[position]
-        holder.itemView.ingredient_imageView.load(BASE_IMAGE_URL + currentIngredient.image) {
+        holder.binding.ingredientImageView.load(BASE_IMAGE_URL + currentIngredient.image) {
             crossfade(600)
             error(R.drawable.ic_error_placholder)
         }
-        holder.itemView.ingredient_name.text = currentIngredient.name.capitalize(Locale.ROOT)
-        holder.itemView.ingredient_amount.text = currentIngredient.amount.toString()
-        holder.itemView.ingredient_unit.text = currentIngredient.unit
-        holder.itemView.ingredient_consistency.text = currentIngredient.consistency
-        holder.itemView.ingredient_original.text = currentIngredient.original
+        holder.binding.ingredientName.text = currentIngredient.name.capitalize(Locale.ROOT)
+        holder.binding.ingredientAmount.text = currentIngredient.amount.toString()
+        holder.binding.ingredientUnit.text = currentIngredient.unit
+        holder.binding.ingredientConsistency.text = currentIngredient.consistency
+        holder.binding.ingredientOriginal.text = currentIngredient.original
 
     }
 
