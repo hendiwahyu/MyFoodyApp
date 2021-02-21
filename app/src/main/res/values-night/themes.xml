@@ -34,7 +34,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorControlNormal">@color/white</item>
-        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:statusBarColor">@color/statusBarColor</item>
     </style>
 
     <style name="CustomTabLayoutStyle" parent="Widget.Design.TabLayout">
@@ -59,6 +59,8 @@
 
     <!--DARK THEME-->
     <color name="backGroundColor">@color/dark</color>
+    <color name="placeholderColor">@color/darker</color>
+    <color name="itemColor">@color/mediumGray</color>
 
     //Custom Chip Style
     <color name="checkedChipBackgroundColor">@color/dark</color>
@@ -74,10 +76,10 @@
     <color name="titleColor">@color/mediumGray</color>
     <color name="descriptionColor">@color/mediumGray</color>
 
-    <color name="statusBarColor">@color/colorPrimaryDark</color>
+    <color name="statusBarColor">@color/black</color>
     <color name="contextualStatusBarColor">@color/black</color>
     <color name="contextualActionBarColor">@color/darker</color>
-    <color name="actionBarBackgroundColor">@color/colorPrimary</color>
+    <color name="actionBarBackgroundColor">@color/darker</color>
 
     //Custom BottomNav Color
     <color name="bottomNavBackground">@color/darker</color>
