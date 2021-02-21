@@ -25,7 +25,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             android:background="@color/cardBackgroundColor">
 
             <ImageView
@@ -130,8 +129,7 @@
                 android:contentDescription="@string/leaf_image"
                 app:layout_constraintStart_toEndOf="@+id/clock_image_view"
                 app:layout_constraintTop_toTopOf="@+id/clock_image_view"
-                app:srcCompat="@drawable/ic_leaf"
-                app:tint="@color/darkGray" />
+                app:srcCompat="@drawable/ic_leaf" />
 
             <TextView
                 android:id="@+id/leaf_text_view"
