@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="mainViewModel"
             type="com.pinteraktif.myfoody.viewmodels.MainViewModel" />
@@ -18,6 +19,8 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/food_joke_cardView"
+            readApiResponse3="@{mainViewModel.foodJokeResponse}"
+            readDatabase3="@{mainViewModel.readFoodJoke}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -61,6 +64,7 @@
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"
+            readApiResponse3="@{mainViewModel.foodJokeResponse}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
@@ -71,6 +75,8 @@
 
         <ImageView
             android:id="@+id/food_joke_error_imageView"
+            readApiResponse4="@{mainViewModel.foodJokeResponse}"
+            readDatabase4="@{mainViewModel.readFoodJoke}"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:alpha="0.5"
@@ -86,6 +92,8 @@
 
         <TextView
             android:id="@+id/food_joke_error_textView"
+            readApiResponse4="@{mainViewModel.foodJokeResponse}"
+            readDatabase4="@{mainViewModel.readFoodJoke}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
