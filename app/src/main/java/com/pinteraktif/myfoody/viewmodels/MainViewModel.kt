@@ -13,11 +13,14 @@ import com.pinteraktif.myfoody.data.database.entities.RecipesEntity
 import com.pinteraktif.myfoody.models.FoodJoke
 import com.pinteraktif.myfoody.models.FoodRecipe
 import com.pinteraktif.myfoody.util.NetworkResult
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import javax.inject.Inject
 
-class MainViewModel @ViewModelInject constructor(
+@HiltViewModel
+class MainViewModel @Inject constructor(
     private val repository: Repository, application: Application
 ) : AndroidViewModel(application) {
 
