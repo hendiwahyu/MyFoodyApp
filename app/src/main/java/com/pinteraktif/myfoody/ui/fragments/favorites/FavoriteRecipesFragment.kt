@@ -64,7 +64,6 @@ class FavoriteRecipesFragment : Fragment() {
     private fun showSnackBar() {
         Snackbar.make(binding.root, "All recipes are removed", Snackbar.LENGTH_SHORT)
             .setAction("Okay") {}.show()
-
     }
 
     override fun onDestroyView() {

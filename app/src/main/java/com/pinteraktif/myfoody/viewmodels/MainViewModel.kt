@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.pinteraktif.myfoody.data.Repository
 import com.pinteraktif.myfoody.data.database.entities.FavoritesEntity
@@ -125,7 +124,7 @@ class MainViewModel @Inject constructor(
 
                 /** Offline cache */
                 val foodJoke = _foodJokeResponse.value?.data
-                if (foodJoke != null){
+                if (foodJoke != null) {
                     offlineCacheFoodJoke(foodJoke)
                 }
 
@@ -143,7 +142,7 @@ class MainViewModel @Inject constructor(
         insertRecipes(recipesEntity)
     }
 
-    private fun offlineCacheFoodJoke(foodJoke: FoodJoke){
+    private fun offlineCacheFoodJoke(foodJoke: FoodJoke) {
         val foodJokeEntity = FoodJokeEntity(foodJoke)
         insertFoodJoke(foodJokeEntity)
     }

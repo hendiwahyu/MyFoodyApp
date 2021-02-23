@@ -60,7 +60,7 @@ class FoodJokeBinding {
                     view.visibility = View.VISIBLE
                     if (view is TextView) {
                         if (apiResponse != null) {
-                            view.text = apiResponse?.message.toString()
+                            view.text = apiResponse.message.toString()
                         }
                     }
                 }

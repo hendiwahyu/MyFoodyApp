@@ -11,7 +11,7 @@ import com.pinteraktif.myfoody.util.RecipesDiffUtil
 
 class RecipesAdapter : RecyclerView.Adapter<RecipesAdapter.MyViewHolder>() {
 
-    private var recipes = emptyList<Result>()
+    private var recipe = emptyList<Result>()
 
     class MyViewHolder(private val binding: ItemRecipesRowLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -34,18 +34,18 @@ class RecipesAdapter : RecyclerView.Adapter<RecipesAdapter.MyViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val currentRecipe = recipes[position]
+        val currentRecipe = recipe[position]
         holder.bind(currentRecipe)
     }
 
     override fun getItemCount(): Int {
-        return recipes.size
+        return recipe.size
     }
 
     fun setData(newData: FoodRecipe) {
-        val recipeDiffUtil = RecipesDiffUtil(recipes, newData.results)
+        val recipeDiffUtil = RecipesDiffUtil(recipe, newData.results)
         val diffUtilResult = DiffUtil.calculateDiff(recipeDiffUtil)
-        recipes = newData.results
+        recipe = newData.results
         diffUtilResult.dispatchUpdatesTo(this)
     }
 
